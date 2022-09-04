@@ -1,0 +1,51 @@
+BURGER TIME
+===========
+
+Version 1.1
+
+(C) 2003 Alvaro Alea Fdz. - ALEAsoft.
+
+Basado en la recreativa de DataEst del mismo Nombre
+
+Distribuido bajo licencia GPL Version 2
+
+Para Spectrum 48K / 128K
+
+Realizado con el Emulador Aspectrum ( http://aspectrum.sourceforge.net )
+en un Intel Dot Station ( http://www.iespana.es/aleasoft/dot.html )
+Con ayuda de SevenuP, BMP2SCR y Speculator
+
+HISTORIA
+========
+
+Eres Juanjo Pe, empleado a tiempo parcial de Ma'nolos la
+Hamburgueseria de tu barrio.
+
+Tu trabajo esta pendiente de un hilo, entre tu alergia a
+los pimientos de piquillo, tu constumbre de mancharte
+con la mostaza, y tu alta velocidad de preparacion de las
+hamburgesas hace que Manolito, tu Jefe, tenga mas ganas de
+despedirte que de desacerse de su juanete.
+
+Pero tu necesitas este trabajo, necesitas este dinero para
+poder llevar a la Maria, tu churri, los fines de semana de movida.
+
+Supera el dia a dia preparando las hamburgesas mientras 
+evitas ser despedido.
+
+EL JUEGO
+========
+
+El personaje se mueve con O,P,Q y A, puede subir y bajar escaleras
+pero no puede saltar.
+
+Pasa por encima de cada uno de los ingredintes (Pan, relleno y pan)
+empujandolos hacia abajo, donde quedara lista la hamburgesa.
+
+Evita al Pimiento y a la Mancha de Mostaza, tienes solo 3 vidas.
+
+El juego vuelve al menu principal con la letra T.
+
+
+Alvaro Alea <a_alea@terra.es> <aleasoft@yahoo.com>
+alvaroalea@hotmail.com en el MS Messenger
