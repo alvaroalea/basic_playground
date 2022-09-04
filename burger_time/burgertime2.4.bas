@@ -1,4 +1,7 @@
-   REM (C) 2003 Alvaro Alea Fenandez, ALEAsoft , Distribuido bajo licencia GPL Version 2        Dedicado a Covadonga
+   REM (C) 2003 Alvaro Alea Fenandez, ALEAsoft 
+   REM Distribuido bajo licencia GPL Version 2 
+   REM Dedicado a Covadonga
+
    DIM r as float
    DIM punt as integer
    DIM hipunt as integer
@@ -6,6 +9,7 @@
    DIM hpend as ubyte
    DIM hlistas as ubyte
    DIM hamb as ubyte
+   DIM nivel as ubyte
    DIM py as ubyte
    DIM px as ubyte
    DIM my as ubyte
@@ -34,30 +38,64 @@
    DIM frame as long
    DIM pframe as long
    DIM mapa1(32,20) as ubyte
+
    RANDOMIZE   
    LET nc = 8
    LET hipunt = 0   
    GOSUB 9610 : REM definimos los UDG 
    GOTO 850   : REM y vamos al MENU PRINCIPAL.
 
-   REM 30 imprimir escenario e incializar variables
    REM DATA FORMAT: elemento (vertical si >=10, si =0 fin pintado), numero de repeticiones, x, y
-25 DATA 1 , 26 , 3 , 4 ,  1 , 26 , 3 , 8 ,   1 , 11 , 3 , 12 , 1 , 11 , 18 , 12 , 1 , 26 , 3 , 16  
-   DATA 10 , 12 , 5 , 4 , 10 , 12 , 27 , 4 , 10 , 8 , 12 , 4 , 10 , 4 , 19 , 12
-   DATA 2 , 3 , 8 , 19 ,  2 , 3 , 22 , 19 ,  2 , 3 , 22 , 4 ,  2 , 3 , 8 , 16 ,   2 , 3 , 8 , 12 
-   DATA 2 , 3 , 8 , 8 ,   2 , 3 , 22 , 16 ,  2 , 3 , 22 , 12 , 2 , 3 , 22 , 8 ,   0
-   REM sinceramente el resto de data ahora no se que es.
-   DATA 17 , 8 , 8 , 8 , 12 , 8 , 16 , 17 , 22 , 4 , 22 , 8 , 22 , 12 , 0
 
+20 DATA  1,26,3,4,  1,26,3,8,   1,11,3,12, 1,11,18,12,  1,26,3,16  
+   DATA 10,12,5,4, 10,12,27,4, 10,8,12,4, 10,4,19,12 
+   DATA  2,3,8,19,  2,3,22,19, 2,3,22,4,  2,3,8,16, 2,3,8,12, 2,3,8,8, 2,3,22,16, 2,3,22,12, 2,3,22,8, 0 
+   DATA  17,8,8,8,12,8,16, 17,22,4,22,8,22,12,0  
+   DATA  15,28,15,3,15,15
+
+21 DATA 1,25,2,4, 1,20,2,8, 1,5,24,8, 1,27,2,12, 1,16,2,16 
+   DATA 10,4,3,4, 10,4,7,8, 10,4,3,12, 10,12,10,4, 10,12,16,4, 10,4,25,4, 10,4,27,8 
+   DATA 2,3,12,4, 2,3,12,8, 2,3,12,12, 2,3,12,16, 2,3,18,4, 2,3,18,8, 2,3,18,12, 0 
+   DATA  17,12,4,12,8,12,12, 13,18,4,18,8,18,12, 0  
+   DATA  11,28,15,3,16,15
+
+22 DATA  1,26,3,4,  1,26,3,8,  1,11,3,12,  1,11,18,12,  1,26,3,16
+   DATA 10,12,5,4,  10,12,27,4,  10,8,12,4, 10,4,19,12 
+   DATA 2,3,8,19, 2,3,22,19, 2,3,22,4, 2,3,8,16, 2,3,8,12, 2,3,8,8, 2,3,22,16, 2,3,22,12, 2,3,22,8, 0
+   DATA 17,8,8,8,12,8,16, 17,22,4,22,8,22,12,0
+   DATA 15,28,15,3,15,15
+
+23 DATA 1,25,2,4, 1,20,2,8, 1,5,24,8, 1,27,2,12, 1,16,2,16
+   DATA 10,4,3,4, 10,4,7,8, 10,4,3,12, 10,12,10,4, 10,12,16,4, 10,4,25,4, 10,4,27,8
+   DATA 2,3,12,4, 2,3,12,8, 2,3,12,12, 2,3,12,16, 2,3,18,4, 2,3,18,8, 2,3,18,12, 0
+   DATA 17,12,4,12,8,12,12, 13,18,4,18,8,18,12, 0
+   DATA 11,28,15,3,16,15
+
+24 DATA  1,26,3,4,  1,26,3,8,  1,11,3,12,  1,11,18,12,  1,26,3,16  
+   DATA 10,12,5,4,  10,12,27,4,  10,8,12,4, 10,4,19,12
+   DATA  2,3,8,19, 2,3,22,19, 2,3,22,4, 2,3,8,16, 2,3,8,12, 2,3,8,8, 2,3,22,16, 2,3,22,12, 2,3,22,8, 0
+   DATA  17,8,8,8,12,8,16, 17,22,4,22,8,22,12,0
+   DATA  15,28,15,3,15,15
+
+25 DATA 1,25,2,4, 1,20,2,8, 1,5,24,8, 1,27,2,12, 1,16,2,16
+   DATA 10,4,3,4, 10,4,7,8, 10,4,3,12, 10,12,10,4, 10,12,16,4, 10,4,25,4, 10,4,27,8
+   DATA 2,3,12,4, 2,3,12,8, 2,3,12,12, 2,3,12,16, 2,3,18,4, 2,3,18,8, 2,3,18,12, 0
+   DATA 17,12,4,12,8,12,12, 13,18,4,18,8,18,12, 0
+   DATA 11,28,15,3,16,15
+
+    REM 30 imprimir escenario e incializar variables
 30  CLS  :  PRINT  AT 0 , 0 ; "DIBUJANDO MAPA, ESPERE POR FAVOR"
-    REM FOR b = 0 TO 639
     FOR a = 0 to 31
-     FOR b = 0 to 19 
-      LET mapa1(a,b)=0
-     next b
+      FOR b = 0 to 19 
+        LET mapa1(a,b)=0
+      next b
     next a 
-    REM NEXT b : REM 639 = ( 32 * 20 ) - 1
-    RESTORE 25
+    if nivel = 0 then restore 20 : goto 90
+    if nivel = 1 then restore 21 : goto 90
+    if nivel = 2 then restore 22 : goto 90
+    if nivel = 3 then restore 23 : goto 90
+    if nivel = 4 then restore 24 : goto 90
+    if nivel = 5 then restore 25 : goto 90
 90  READ a : IF a = 0 THEN  GOTO 210
       IF a = 1 THEN  LET p$ = "\H" :  INK 3
       IF a = 2 THEN  LET p$ = "_" :  INK 7
@@ -72,7 +110,7 @@
     GOTO 90
 210 GOSUB 1110 : REM Imprime las hamburgesas
     LET py1 = 15 :  LET px1 = 28 :  GOSUB 640 : REM Inicializa e imprime el bicho P (medio)
-    LET my1 = 15 :  LET mx1 = 3 :  GOSUB 570 : REM Inicializa e imprime el bicho M (medio)
+    LET my1 = 15 :  LET mx1 =  3 :  GOSUB 570 : REM Inicializa e imprime el bicho M (medio)
     LET cx1 = 15 :  LET cy1 = 15 :  GOSUB 810 : REM Inicializa e imprime el Jugador (medio)
     GOSUB 670 : REM imprimir vidas
     GOSUB 930 : REM imprimir marcador
@@ -84,16 +122,14 @@
     IF frame < (pframe + 10) THEN GOTO 270
     LET pframe = frame
     LET key$ =  INKEY$ 
-280 IF key$ = "o" AND  mapa1(cx-1,cy+1) <> 0 THEN  LET cx1 = cx - 1 :  GOTO 330
-290 IF key$ = "p" AND  mapa1(cx+1,cy+1) <> 0 THEN  LET cx1 = cx + 1 :  GOTO 330
-300 IF key$ = "a" AND  mapa1(cx  ,cy+1) = 10 THEN  LET cy1 = cy + 1 :  GOTO 330
-310 IF key$ = "q" AND  mapa1(cx  ,cy  ) = 10 THEN  LET cy1 = cy - 1 :  GOTO 330
-320 IF key$ = "t" THEN  GOTO 730
+    IF key$ = "o" AND  mapa1(cx-1,cy+1) <> 0 THEN  LET cx1 = cx - 1 :  GOTO 330
+    IF key$ = "p" AND  mapa1(cx+1,cy+1) <> 0 THEN  LET cx1 = cx + 1 :  GOTO 330
+    IF key$ = "a" AND  mapa1(cx  ,cy+1) = 10 THEN  LET cy1 = cy + 1 :  GOTO 330
+    IF key$ = "q" AND  mapa1(cx  ,cy  ) = 10 THEN  LET cy1 = cy - 1 :  GOTO 330
+    IF key$ = "t" THEN  GOTO 730
 330 IF cx <> cx1 OR cy <> cy1 THEN  GOSUB 770 : REM si se movio imprime al jugador
-340 IF hpend > 0 THEN  GOSUB 1400 : REM si hamb. cayendo, actualiza
-350 IF hlistas = 6 THEN  GOTO 1560 : REM todas abajo fin nivel.
-360 IF cx = px AND cy = py THEN  GOTO 1030 : REM muerte por P
-370 IF cx = mx AND cy = my THEN  GOTO 1030 : REM muerte por M
+    IF hpend > 0 THEN  GOSUB 1400 : REM si hamb. cayendo, actualiza
+    IF hlistas = 6 THEN  GOTO 1560 : REM todas abajo fin nivel.
 
     REM P se mueve al azar
 380 LET r =  RND 
@@ -109,7 +145,8 @@
 
     IF px1 = px AND py1 = py THEN  GOTO 380
 440 GOSUB 600 : REM Imprimir bicho P
-
+    IF cx = px AND cy = py THEN  GOTO 1030 : REM muerte por P
+   
     REM M no siempre se mueve, pero si lo hace, persigue al jugador
 450 IF  RND  < 0.15 THEN  GOTO 270
     IF my > cy AND  mapa1(mx,my)  = 10 THEN  LET my1 = my - 1 :  GOTO 510
@@ -118,6 +155,7 @@
     IF  mapa1(mx+1,my+1)  <> 0 THEN  LET mx1 = mx + 1 :  GOTO 510
     LET mx1 = mx1 - 1
 510 GOSUB 530 : REM Imprimir bicho M
+    IF cx = mx AND cy = my THEN  GOTO 1030 : REM muerte por M
 
     GOTO 270 : REM inicio bucle juego.
 
@@ -139,20 +177,6 @@
     PRINT  INK 4 ;  AT py - 1 , px ; "\M" ;  AT py , px ; "\N"
 660 RETURN
 
-    REM 670 - RUTINA IMPRIMIR VIDAS 
-670 LET a = 20 -  ( 3 * vidas ) 
-    FOR c = 5 TO 20 STEP 3
-    PRINT  INK 7 ;  AT c , 0 ; " " ;  AT c + 1 , 0 ; " "
-    IF c > a THEN  PRINT  INK 7 ;  AT c , 0 ; "\I" ;  AT c + 1 , 0 ; "\J"
-    NEXT c
-    RETURN
-
-    REM 730 - RUTINA DE GAME OVER 
-730 PRINT  INK 7 ;  AT 9 , 10 ;  FLASH 1 ; "           " ;  AT 10 , 10 ; " GAME OVER " ;  AT 11 , 10 ; "           "
-    IF hipunt < punt THEN  LET hipunt = punt
-750 IF  INKEY$  <> "" THEN  GOTO 750
-    PAUSE 1 :  PAUSE 0 :  GOTO 850
-
     REM 770 - RUTINA IMPRIMIR al jugador
 770 IF  mapa1(cx,cy) = 10 THEN  PRINT  INK 5 ;  AT cy , cx ; "\G" :  GOTO 790
     PRINT  AT cy , cx ; " "
@@ -162,6 +186,12 @@
     LET cx = cx1 :  LET cy = cy1
     IF mapa1(cx,cy+1) = 2 THEN  GOSUB 1260
     RETURN 
+
+    REM 730 - RUTINA DE GAME OVER 
+730 PRINT  INK 7 ;  AT 9 , 10 ;  FLASH 1 ; "           " ;  AT 10 , 10 ; " GAME OVER " ;  AT 11 , 10 ; "           "
+    IF hipunt < punt THEN  LET hipunt = punt
+750 IF  INKEY$  <> "" THEN  GOTO 750
+    PAUSE 1 :  PAUSE 0
 
     REM 850 - MENU PRINCIPAL
 850 BORDER 1 :  INK 7 :  PAPER 0 :  BRIGHT 1 :  FLASH 0 :  CLS 
@@ -183,6 +213,7 @@
     LET hpend = 0
     LET punt = 0
     LET vidas = 3
+    LET nivel = 0
     GOTO 30
 
     REM 930 - RUTINA DE IMPRIMIR MARCADOR
@@ -206,6 +237,14 @@
      LET mx1 = 3 :  LET my1 = 15 :  GOSUB 530
      LET cx1 = 15 :  LET cy1 = 15 :  GOSUB 810
      GOTO 270
+
+    REM 670 - RUTINA IMPRIMIR VIDAS 
+670 LET a = 20 -  ( 3 * vidas ) 
+    FOR c = 5 TO 20 STEP 3
+    PRINT  INK 7 ;  AT c , 0 ; " " ;  AT c + 1 , 0 ; " "
+    IF c > a THEN  PRINT  INK 7 ;  AT c , 0 ; "\I" ;  AT c + 1 , 0 ; "\J"
+    NEXT c
+    RETURN
 
      REM 1110 - RUTINA IMPRESION HAMBURGESAS
 1110 LET hamb = 0 :  LET dh = @hmapa
@@ -265,7 +304,9 @@
 1580 IF  INKEY$  <> "" THEN  GOTO 1580
      PAUSE 1 :  PAUSE 0
      LET hlistas = 0 
-     LET hpend = 0   
+     LET hpend = 0
+     LET nivel = nivel +1
+     IF nivel >=6 then let nivel = 0   
      GOTO 30 : REM volvemos a dibujar el escenario desde 0.
 
      REM 9610 - RUTINA DE GENERACION DE UDG
